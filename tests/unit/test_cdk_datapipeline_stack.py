@@ -66,3 +66,4 @@ def test_glue_pipeline_created():
     )
 
     template.resource_count_is("AWS::Glue::Job", 2)
+    template.resource_count_is("AWS::Glue::Trigger", 2)
