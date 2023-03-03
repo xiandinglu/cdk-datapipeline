@@ -66,4 +66,50 @@ def test_glue_pipeline_created():
     )
 
     template.resource_count_is("AWS::Glue::Job", 2)
+
+    template.has_resource_properties(
+        "AWS::Glue::Trigger",
+        {
+            "Actions": [
+                {
+                    "JobName": "GlueJob1",
+                    "NotificationProperty": {
+                        "NotifyDelayAfter": 2
+                    },
+                    "Timeout": 2
+                }
+            ],
+            "Type": "SCHEDULED",
+            "Name": "GlueTrigger1",
+            "Schedule": "cron(0 0 * * ? *)",
+            "StartOnCreation": False
+        }
+    )
+
+    template.has_resource_properties(
+        "AWS::Glue::Trigger",
+        {
+            "Actions": [
+                {
+                    "JobName": "GlueJob2",
+                    "NotificationProperty": {
+                        "NotifyDelayAfter": 2
+                    },
+                    "Timeout": 2
+                }
+            ],
+            "Type": "CONDITIONAL",
+            "Name": "GlueTrigger2",
+            "Predicate": {
+                "Conditions": [
+                    {
+                        "JobName": "GlueJob1",
+                        "LogicalOperator":"EQUALS",
+                        "State": "SUCCEEDED"
+                    }
+                ]
+            },
+            "StartOnCreation": False
+        }
+    )
     template.resource_count_is("AWS::Glue::Trigger", 2)
