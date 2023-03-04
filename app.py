@@ -5,6 +5,7 @@ import aws_cdk as cdk
 
 from cdk_datapipeline.cdk_datapipeline_stack import CdkDatapipelineStack
 from cdk_datapipeline.cdk_glue_stack import CdkGlueStack
+from cdk_datapipeline.cdk_lambda_stack import CdkLambdaStack
 
 
 app = cdk.App()
@@ -25,6 +26,7 @@ app = cdk.App()
 
 #     # For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html
 #     )
-CdkGlueStack(app, "CdkGlueStack", env=cdk.Environment(account='765492428047', region='us-east-1'))
+# CdkGlueStack(app, "CdkGlueStack", env=cdk.Environment(account='765492428047', region='us-east-1'))
+CdkLambdaStack(app, "CdkLambdaStack", env=cdk.Environment(account='765492428047', region='us-east-1'))
 
 app.synth()
