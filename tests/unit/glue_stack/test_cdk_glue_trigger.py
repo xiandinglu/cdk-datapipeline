@@ -5,7 +5,7 @@ from cdk_datapipeline.cdk_glue_stack import CdkGlueStack
 
 # example tests. To run these tests, uncomment this file along with the example
 # resource in cdk_datapipeline/cdk_datapipeline_stack.py
-def test_glue_pipeline_created():
+def test_glue_trigger_created():
     app = core.App()
     stack = CdkGlueStack(app, "cdk-glue")
     template = assertions.Template.from_stack(stack)
@@ -55,5 +55,10 @@ def test_glue_pipeline_created():
             "StartOnCreation": False
         }
     )
+
+def test_glue_trigger_resource_count():
+    app = core.App()
+    stack = CdkGlueStack(app, "cdk-glue")
+    template = assertions.Template.from_stack(stack)
 
     template.resource_count_is("AWS::Glue::Trigger", 2)
