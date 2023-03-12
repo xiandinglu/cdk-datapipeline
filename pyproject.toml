@@ -1,0 +1,16 @@
+[tool.black]
+exclude = '''
+/(
+\.git
+| \.pytest_cache
+| \.venv
+| cdk.out
+| cdk.json
+)/
+'''
+
+[tool.interrogate]
+ignore-init-method = true
+ignore-init-module = false
+ignore-module = false
+fail-under = 95
